@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:todo_app/provider/theme_provider.dart';
 import 'package:todo_app/utility/constant.dart';
+import 'package:todo_app/widget/add_todo_dialog_widget.dart';
 import 'package:todo_app/widget/change_theme_button.dart';
+import 'package:todo_app/widget/todo_list_widget.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -16,7 +16,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     final tabs = [
-      Container(),
+      const TodoListWidget(),
       Container(),
     ];
     return Scaffold(
@@ -47,13 +47,13 @@ class _HomePageState extends State<HomePage> {
       ),
       body: tabs[selectedIndex],
       floatingActionButton: FloatingActionButton(
-        onPressed: () => showDialog(
+        onPressed: () =>
+        showDialog(
           context: context,
-          builder: AddTodoDialogWidget(),
+         builder: (_) =>  const AddTodoDialogWidget(),
           barrierDismissible: false,
         ),
 
-        
         child: Icon(
           Icons.add,
           size: 30.0,

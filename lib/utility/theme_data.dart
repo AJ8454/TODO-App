@@ -9,6 +9,7 @@ class MyThemeData {
     iconTheme: const IconThemeData(color: kCylanColor),
     floatingActionButtonTheme:
         const FloatingActionButtonThemeData(backgroundColor: kCylanColor),
+    backgroundColor: const Color(0xFF1A1A1A),
   );
 
   static final lightTheme = ThemeData(
@@ -19,5 +20,11 @@ class MyThemeData {
     appBarTheme: const AppBarTheme(backgroundColor: kAppBarColor),
     floatingActionButtonTheme:
         const FloatingActionButtonThemeData(backgroundColor: kGreyColor),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: ButtonStyle(
+        backgroundColor: MaterialStateProperty.all(kAppBarColor),
+      ),
+    ),
+    backgroundColor: const Color(0xFFFFFFFF),
   );
 }
