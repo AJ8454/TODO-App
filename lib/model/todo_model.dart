@@ -12,7 +12,7 @@ class Todo {
   Todo({
     required this.createdTime,
     required this.title,
-    this.id,
+    this.id = '',
     this.description = '',
     this.isDone = false,
   });

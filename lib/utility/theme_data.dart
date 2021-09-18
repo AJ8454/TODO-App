@@ -4,12 +4,12 @@ import 'package:todo_app/utility/constant.dart';
 class MyThemeData {
   static final darkTheme = ThemeData(
     scaffoldBackgroundColor: kDarkColor,
-    primaryColor: kGreyColor,
+    primaryColor: kDarkColor,
     colorScheme: const ColorScheme.dark(),
     iconTheme: const IconThemeData(color: kCylanColor),
     floatingActionButtonTheme:
         const FloatingActionButtonThemeData(backgroundColor: kCylanColor),
-    backgroundColor: const Color(0xFF1A1A1A),
+    backgroundColor: kGreyColor,
   );
 
   static final lightTheme = ThemeData(

@@ -53,12 +53,6 @@ class TodoFormWidget extends StatelessWidget {
           focusColor: Theme.of(context).primaryColor,
           labelText: 'Description',
         ),
-        validator: (desctiption) {
-          if (desctiption!.isEmpty) {
-            return 'The description cannot be empty';
-          }
-          return null;
-        },
         onChanged: onChangedDescription,
       );
 
