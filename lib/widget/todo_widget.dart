@@ -3,6 +3,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:provider/provider.dart';
 import 'package:todo_app/model/todo_model.dart';
 import 'package:todo_app/provider/todos_provider.dart';
+import 'package:todo_app/screens/edit_todo_screen.dart';
 import 'package:todo_app/utility/constant.dart';
 import 'package:todo_app/widget/utils.dart';
 
@@ -22,7 +23,7 @@ class TodoWidget extends StatelessWidget {
           actions: [
             IconSlideAction(
               color: Colors.green,
-              onTap: () {},
+              onTap: () => editTodo(context, todo),
               caption: 'Edit',
               icon: Icons.edit,
             ),
@@ -38,45 +39,56 @@ class TodoWidget extends StatelessWidget {
         ),
       );
 
-  Container buildTodo(BuildContext context) => Container(
-        color: Theme.of(context).backgroundColor,
-        padding: const EdgeInsets.all(20),
-        child: Row(
-          children: [
-            Checkbox(
-              activeColor: Theme.of(context).primaryColor,
-              checkColor: Colors.white,
-              value: todo.isDone,
-              onChanged: (_) {},
-            ),
-            const SizedBox(width: 20),
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    todo.title!,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: kAppBarColor,
-                      fontSize: 22,
-                    ),
-                  ),
-                  if (todo.description!.isNotEmpty)
-                    Container(
-                      margin: const EdgeInsets.only(top: 4),
-                      child: Text(
-                        todo.description!,
-                        style: const TextStyle(
-                          height: 1.5,
-                          fontSize: 20,
-                        ),
+  Widget buildTodo(BuildContext context) => GestureDetector(
+        onTap: () => editTodo(context, todo),
+        child: Container(
+          color: Theme.of(context).backgroundColor,
+          padding: const EdgeInsets.all(20),
+          child: Row(
+            children: [
+              Checkbox(
+                activeColor: Theme.of(context).primaryColor,
+                checkColor: Colors.white,
+                value: todo.isDone,
+                onChanged: (_) {
+                  final provider =
+                      Provider.of<TodosProvider>(context, listen: false);
+                  final isDone = provider.toggleTodoStatus(todo);
+                  Utils.showSnackBar(
+                    context,
+                    isDone ? 'Task Completed' : 'Task marked incomplete',
+                  );
+                },
+              ),
+              const SizedBox(width: 20),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      todo.title!,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: kAppBarColor,
+                        fontSize: 22,
                       ),
                     ),
-                ],
-              ),
-            )
-          ],
+                    if (todo.description!.isNotEmpty)
+                      Container(
+                        margin: const EdgeInsets.only(top: 4),
+                        child: Text(
+                          todo.description!,
+                          style: const TextStyle(
+                            height: 1.5,
+                            fontSize: 20,
+                          ),
+                        ),
+                      ),
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       );
 
@@ -85,4 +97,10 @@ class TodoWidget extends StatelessWidget {
     provider.removeTodo(todo);
     Utils.showSnackBar(context, 'Deleted the task');
   }
+
+  void editTodo(BuildContext context, Todo todo) => Navigator.of(context).push(
+        MaterialPageRoute(
+          builder: (context) => EditTodoPage(todo: todo),
+        ),
+      );
 }

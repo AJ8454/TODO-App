@@ -6,6 +6,8 @@ import 'screens/home_screen.dart';
 import 'utility/constant.dart';
 import 'utility/theme_data.dart';
 
+
+// TODO: need to connect the app with firebase and store the data over their.
 void main() {
   runApp(
     MultiProvider(
@@ -23,7 +25,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final themeProvider = ;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: kAppTitle,
